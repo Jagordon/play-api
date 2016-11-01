@@ -27,7 +27,7 @@ class HomeController @Inject() extends Controller {
 
 class ApiController @Inject()(val reactiveMongoApi: ReactiveMongoApi) extends Controller
   with MongoController with ReactiveMongoComponents {
-  def ApiRepo = new ApiRepoImpl(reactiveMongoApi)
+  def ApiRepo = new MongoApiRepo(reactiveMongoApi)
 
     def index = Action.async { implicit request =>
       ApiRepo.find().map(users => Ok(Json.toJson(users)))

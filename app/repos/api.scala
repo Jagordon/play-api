@@ -18,7 +18,7 @@ trait ApiRepo {
   def save(selector: BSONDocument)(implicit ec: ExecutionContext): Future[WriteResult]
 }
 
-class ApiRepoImpl @Inject() (reactiveMongoApi: ReactiveMongoApi) extends ApiRepo {
+class MongoApiRepo @Inject()(reactiveMongoApi: ReactiveMongoApi) extends ApiRepo {
 
   def collection = reactiveMongoApi.db.collection[JSONCollection]("users")
 
